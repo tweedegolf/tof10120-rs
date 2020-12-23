@@ -12,24 +12,17 @@ repository = "https://github.com/tweedegolf/tof10120-rs"
 exclude = ["/examples", "/.cargo", "/target", "/openocd.cfg", "/openocd.gdb", "/memory.x", "Cargo.lock", "/.gitignore", "/.cargo_vcs_info.json"]
 
 [dependencies]
-embedded-hal = { version = "0.2.4", features = ["unproven"] }
-#embedded-hal = { version = "0.2.3", features = ["unproven"] }
-cortex-m = "0.6.2"
+embedded-hal = { version = "0.2.3", features = ["unproven"] }
+cortex-m = "0.6.0"
+nb = "0.1.2"
 
 [dev-dependencies]
-cortex-m-rt = "0.6.13"
-#cortex-m-rt = "0.6.12"
-
+cortex-m-rt = "0.6.8"
 cortex-m-semihosting = "0.3.7"
-#cortex-m-semihosting = "0.3.5"
-nb = "1.0.0"
-#nb = "0.1.2"
 panic-semihosting = "0.5.6"
-#panic-semihosting = "0.5.3"
 
 [dev-dependencies.stm32f1xx-hal]
 version = "0.7.0"
-#version = "0.6.0"
 features = ["stm32f103", "rt", "medium"]
 
 [profile.dev]
