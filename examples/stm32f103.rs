@@ -8,7 +8,6 @@ use stm32f1xx_hal::gpio::*;
 use stm32f1xx_hal::i2c::{BlockingI2c, Mode};
 use stm32f1xx_hal::prelude::*;
 
-use stm32f1xx_hal::delay::Delay;
 use stm32f1xx_hal::stm32;
 
 use tof10120::TOF10120;
@@ -16,7 +15,6 @@ use tof10120::TOF10120;
 #[entry]
 fn main() -> ! {
     let peripherals = stm32::Peripherals::take().unwrap();
-    let core_peripherals = stm32::CorePeripherals::take().unwrap();
 
     let mut rcc = peripherals.RCC.constrain();
     let mut flash = peripherals.FLASH.constrain();
@@ -46,8 +44,8 @@ fn main() -> ! {
 
     // ==== Init driver
     let tof = TOF10120::init(i2c1);
-    let sample = nb::block!(tof.read_sample(i2c1));
 
+    // Blockingly read samples and print them over semihosting.
     loop {
         let sample = nb::block!(tof.read_sample(i2c1)).unwrap();
         cortex_m_semihosting::hprintln!("Sample: {:?}mm", sample).unwrap();
